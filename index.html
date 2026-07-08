@@ -1,0 +1,2287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FitGenie AI – Premium AI-Powered Health Operating System. Real-time wearables telemetry, future simulations, and injury adaptive tracking.">
+  <title>FitGenie AI – Premium AI-Powered Health OS</title>
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- App Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-mode">
+
+  <!-- Toast Notification Floating Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <div id="app"></div>
+
+  <template id="layout-public">
+    <!-- ==================== LANDING SCREEN ==================== -->
+    <div id="screen-landing" class="screen active">
+      <!-- Landing Navbar -->
+      <nav class="landing-nav glass">
+        <div class="logo-container">
+          <div class="logo-icon"><i data-lucide="wand-2"></i></div>
+          <span class="logo-text">FitGenie <span>AI</span></span>
+        </div>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#testimonials">Reviews</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="nav-actions">
+          <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme"><i data-lucide="moon"></i></button>
+          <button class="btn btn-outline" onclick="showAuth('login')">Sign In</button>
+          <button class="btn btn-primary" onclick="showAuth('signup')">Get Started</button>
+        </div>
+        <button class="mobile-nav-toggle" onclick="toggleMobileLandingNav()" aria-label="Toggle Navigation"><i data-lucide="menu"></i></button>
+      </nav>
+
+      <!-- Mobile Landing Menu Overlay -->
+      <div id="mobile-landing-menu" class="mobile-landing-menu glass">
+        <a href="#features" onclick="toggleMobileLandingNav()">Features</a>
+        <a href="#how-it-works" onclick="toggleMobileLandingNav()">How It Works</a>
+        <a href="#testimonials" onclick="toggleMobileLandingNav()">Reviews</a>
+        <a href="#pricing" onclick="toggleMobileLandingNav()">Pricing</a>
+        <a href="#faq" onclick="toggleMobileLandingNav()">FAQ</a>
+        <div class="mobile-menu-actions">
+          <button class="btn btn-outline w-full" onclick="showAuth('login'); toggleMobileLandingNav();">Sign In</button>
+          <button class="btn btn-primary w-full" onclick="showAuth('signup'); toggleMobileLandingNav();">Get Started</button>
+        </div>
+      </div>
+
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-glow-1"></div>
+        <div class="hero-glow-2"></div>
+        <div class="hero-container container">
+          <div class="hero-content">
+            <div class="badge-pill"><span class="badge-pulse"></span>Next-Gen AI Fitness & Diet Plan</div>
+            <h1>Personalized AI <br><span class="gradient-text">Fitness & Nutrition</span> Coach</h1>
+            <p class="hero-subtitle">Meet FitGenie, the smart AI that builds custom workout structures, designs nutrition macro-plans, adjusts for injuries instantly, and coaches you to peak health.</p>
+            <div class="hero-buttons">
+              <button class="btn btn-primary btn-lg" onclick="showAuth('signup')">Start Your AI Plan <i data-lucide="arrow-right"></i></button>
+              <a href="#how-it-works" class="btn btn-outline btn-lg glass">See How It Works <i data-lucide="play-circle"></i></a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat-item">
+                <h3>98%</h3>
+                <p>Goal Success Rate</p>
+              </div>
+              <div class="stat-item">
+                <h3>15M+</h3>
+                <p>Calories Logged</p>
+              </div>
+              <div class="stat-item">
+                <h3>4.9★</h3>
+                <p>App Store Review</p>
+              </div>
+            </div>
+          </div>
+          <div class="hero-illustration">
+            <div class="illustration-box glass">
+              <!-- Radial Gradient circles and grids -->
+              <div class="bg-grid-overlay"></div>
+              <div class="illustration-ring">
+                <svg width="240" height="240" viewBox="0 0 100 100">
+                  <defs>
+                    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="var(--primary)"/>
+                      <stop offset="100%" stop-color="var(--secondary)"/>
+                    </linearGradient>
+                  </defs>
+                  <circle cx="50" cy="50" r="42" stroke="rgba(255,255,255,0.06)" stroke-width="6" fill="none" />
+                  <circle cx="50" cy="50" r="42" stroke="url(#ringGrad)" stroke-width="6" fill="none" stroke-dasharray="263.8" stroke-dashoffset="70" stroke-linecap="round" class="ring-pulse" />
+                </svg>
+                <div class="illustration-metrics">
+                  <span class="metric-num font-header">80%</span>
+                  <span class="metric-label">Daily Goal</span>
+                </div>
+              </div>
+              <div class="floating-widget card-widget-1 glass hover-glow float-anim">
+                <div class="widget-icon primary"><i data-lucide="activity"></i></div>
+                <div>
+                  <h4>14,250 Steps</h4>
+                  <p>Goal Achieved</p>
+                </div>
+              </div>
+              <div class="floating-widget card-widget-2 glass hover-glow float-anim-reverse">
+                <div class="widget-icon accent"><i data-lucide="flame"></i></div>
+                <div>
+                  <h4>580 kcal</h4>
+                  <p>Active Burn</p>
+                </div>
+              </div>
+              <div class="floating-widget card-widget-3 glass hover-glow float-anim">
+                <div class="widget-icon secondary"><i data-lucide="cup-soda"></i></div>
+                <div>
+                  <h4>2.4L Water</h4>
+                  <p>Hydrated</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section id="features" class="features-section">
+        <div class="container text-center">
+          <h2 class="section-title">Why FitGenie AI?</h2>
+          <p class="section-subtitle">Hyper-personalized wellness software that adapts to your environment, habits, and body goals daily.</p>
+          
+          <div class="features-grid">
+            <div class="feature-card glass hover-lift hover-glow">
+              <div class="feature-icon"><i data-lucide="dumbbell"></i></div>
+              <h3>Dynamic Workouts</h3>
+              <p>Tailored structures that recalculate instantly when you swap exercises, change equipment, or report joint soreness.</p>
+            </div>
+            <div class="feature-card glass hover-lift hover-glow">
+              <div class="feature-icon"><i data-lucide="salad"></i></div>
+              <h3>Precision Dietetics</h3>
+              <p>Dynamic macros tailored to allergies, dietary styles, and workouts. Swap recipes with interactive single-tap substitutions.</p>
+            </div>
+            <div class="feature-card glass hover-lift hover-glow">
+              <div class="feature-icon"><i data-lucide="shield-alert"></i></div>
+              <h3>Injury Adaptation</h3>
+              <p>Report pain points on an interactive digital body model. FitGenie will reroute workouts to avoid active strain.</p>
+            </div>
+            <div class="feature-card glass hover-lift hover-glow">
+              <div class="feature-icon"><i data-lucide="message-square"></i></div>
+              <h3>AI Chat Coach</h3>
+              <p>Real-time coaching chatbot with suggested prompts, voice activation, and custom projections for weight change.</p>
+            </div>
+            <div class="feature-card glass hover-lift hover-glow">
+              <div class="feature-icon"><i data-lucide="trending-up"></i></div>
+              <h3>Predictive Analytics</h3>
+              <p>Chart overlays tracking muscle composition, habits, streaks, and a math-backed 12-week progress forecast.</p>
+            </div>
+            <div class="feature-card glass hover-lift hover-glow">
+              <div class="feature-icon"><i data-lucide="trophy"></i></div>
+              <h3>Gamified Milestones</h3>
+              <p>Unlock streak achievements and badges as you hit nutrition, workout, and consistency logs.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section id="how-it-works" class="how-works-section">
+        <div class="container">
+          <h2 class="section-title text-center">How FitGenie Works</h2>
+          <p class="section-subtitle text-center">Your custom plan generated and adapted in four easy steps.</p>
+          
+          <div class="steps-timeline">
+            <div class="step-card glass hover-glow">
+              <div class="step-num">1</div>
+              <h3>Onboarding Assessment</h3>
+              <p>Provide physical metrics, goals, food choices, injuries, and schedules in our 18-step quick wizard.</p>
+            </div>
+            <div class="step-card glass hover-glow">
+              <div class="step-num">2</div>
+              <h3>Genie Model Computation</h3>
+              <p>Our algorithms calculate precise targets, rest periods, macro schedules, and grocery lists.</p>
+            </div>
+            <div class="step-card glass hover-glow">
+              <div class="step-num">3</div>
+              <h3>Track & Train</h3>
+              <p>Follow daily workouts with visual session guides, log sets, check off groceries, and log hydration.</p>
+            </div>
+            <div class="step-card glass hover-glow">
+              <div class="step-num">4</div>
+              <h3>Log, Adjust & Scale</h3>
+              <p>Submit daily check-ins. Modify workouts dynamically based on soreness, energy, or busy schedules.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section id="testimonials" class="testimonials-section">
+        <div class="container text-center">
+          <h2 class="section-title">Real Results from Real Genies</h2>
+          <p class="section-subtitle">See how FitGenie users are building confidence, health, and permanent habits.</p>
+          
+          <div class="testimonial-slider-container">
+            <div class="testimonial-slider" id="testimonial-track">
+              <!-- Testimonial 1 -->
+              <div class="testimonial-slide glass hover-glow">
+                <div class="user-avatar-placeholder">DJ</div>
+                <div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+                <p class="testimonial-text">"The injury adaptations are incredible. When my knee was sore, it swapped out lunges for hip thrusts instantly. Lost 12 lbs in 8 weeks!"</p>
+                <h4>Daniel J.</h4>
+                <span class="user-meta">Software Dev, 32</span>
+              </div>
+              <!-- Testimonial 2 -->
+              <div class="testimonial-slide glass hover-glow">
+                <div class="user-avatar-placeholder">SR</div>
+                <div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+                <p class="testimonial-text">"As a vegan with peanut allergies, finding customized meal structures was a pain. FitGenie generates delicious recipes that fit perfectly."</p>
+                <h4>Sarah R.</h4>
+                <span class="user-meta">Marketing Lead, 27</span>
+              </div>
+              <!-- Testimonial 3 -->
+              <div class="testimonial-slide glass hover-glow">
+                <div class="user-avatar-placeholder">MK</div>
+                <div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+                <p class="testimonial-text">"The grocery checklist makes shopping seamless. The interactive charts showing my strength gains make it so addictive."</p>
+                <h4>Michael K.</h4>
+                <span class="user-meta">University Coach, 41</span>
+              </div>
+            </div>
+            <div class="slider-controls">
+              <button onclick="slideTestimonial(-1)" class="btn-icon glass"><i data-lucide="chevron-left"></i></button>
+              <button onclick="slideTestimonial(1)" class="btn-icon glass"><i data-lucide="chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing Section -->
+      <section id="pricing" class="pricing-section">
+        <div class="container text-center">
+          <h2 class="section-title">Simple Premium Pricing</h2>
+          <p class="section-subtitle">Invest in your health with a plan that fits your exact goals.</p>
+          
+          <div class="pricing-toggle-container">
+            <span id="price-toggle-monthly" class="active">Monthly</span>
+            <label class="switch">
+              <input type="checkbox" id="pricing-checkbox" onchange="togglePricingPeriod()">
+              <span class="slider round"></span>
+            </label>
+            <span id="price-toggle-annual">Annual (Save 25%)</span>
+          </div>
+
+          <div class="pricing-cards">
+            <!-- Free Tier -->
+            <div class="price-card glass hover-glow">
+              <h3>Free Plan</h3>
+              <p class="card-desc">Basic health tracking tools</p>
+              <div class="price-amount">$0<span class="price-period">/mo</span></div>
+              <ul class="price-features">
+                <li><i data-lucide="check" class="success"></i> Core workout templates</li>
+                <li><i data-lucide="check" class="success"></i> Macro calculator</li>
+                <li><i data-lucide="check" class="success"></i> Manual hydration logs</li>
+                <li class="disabled"><i data-lucide="x"></i> AI Coach chat assistant</li>
+                <li class="disabled"><i data-lucide="x"></i> Injury-recovery adapting</li>
+                <li class="disabled"><i data-lucide="x"></i> 12-week progress projection</li>
+              </ul>
+              <button class="btn btn-outline w-full" onclick="showAuth('signup')">Sign Up Free</button>
+            </div>
+
+            <!-- Premium Tier -->
+            <div class="price-card glass popular hover-glow">
+              <div class="popular-tag">Most Popular</div>
+              <h3>Genie Pro</h3>
+              <p class="card-desc">Hyper-personalized AI health</p>
+              <div class="price-amount"><span id="premium-price">$14.99</span><span class="price-period">/mo</span></div>
+              <ul class="price-features">
+                <li><i data-lucide="check" class="success"></i> Infinite custom AI workouts</li>
+                <li><i data-lucide="check" class="success"></i> Precision AI meals & recipes</li>
+                <li><i data-lucide="check" class="success"></i> Direct interactive grocery compilation</li>
+                <li><i data-lucide="check" class="success"></i> Interactive Injury management</li>
+                <li><i data-lucide="check" class="success"></i> Unlimited AI Coach chat with voice</li>
+                <li><i data-lucide="check" class="success"></i> Progress projections & graphs</li>
+              </ul>
+              <button class="btn btn-primary w-full" onclick="showAuth('signup')">Start Genie Pro</button>
+            </div>
+
+            <!-- Team/Expert Tier -->
+            <div class="price-card glass hover-glow">
+              <h3>Genie Plus</h3>
+              <p class="card-desc">Advanced biometrics & custom reports</p>
+              <div class="price-amount"><span id="plus-price">$24.99</span><span class="price-period">/mo</span></div>
+              <ul class="price-features">
+                <li><i data-lucide="check" class="success"></i> Everything in Genie Pro</li>
+                <li><i data-lucide="check" class="success"></i> Weekly executive AI PDF reports</li>
+                <li><i data-lucide="check" class="success"></i> Sleep & heartrate sync overlays</li>
+                <li><i data-lucide="check" class="success"></i> Custom macro overrides</li>
+                <li><i data-lucide="check" class="success"></i> Priority coach responses</li>
+                <li><i data-lucide="check" class="success"></i> Shared grocery integrations</li>
+              </ul>
+              <button class="btn btn-outline w-full" onclick="showAuth('signup')">Get Plus Tier</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faq" class="faq-section">
+        <div class="container">
+          <h2 class="section-title text-center">Frequently Asked Questions</h2>
+          <p class="section-subtitle text-center">Have questions? We've got answers.</p>
+          
+          <div class="faq-list">
+            <div class="faq-item glass">
+              <button class="faq-trigger" onclick="toggleFaq(this)">
+                <span>How does the AI customize my workouts?</span>
+                <i data-lucide="chevron-down"></i>
+              </button>
+              <div class="faq-content">
+                <p>FitGenie looks at your available equipment (e.g. dumbbells, barbell, bands, or bodyweight), goals, current level, active pain points, schedule, and duration preference to compute optimal periodization structures, specific exercises, sets, reps, and target heart-rate zones.</p>
+              </div>
+            </div>
+            
+            <div class="faq-item glass">
+              <button class="faq-trigger" onclick="toggleFaq(this)">
+                <span>What if I have an injury or joint pain?</span>
+                <i data-lucide="chevron-down"></i>
+              </button>
+              <div class="faq-content">
+                <p>You can tap on the Injury Management dashboard and click on any joint or muscle region. FitGenie recalculates your weekly plans immediately, swapping compound loaded lifts with knee/shoulder/elbow friendly recovery patterns and adding joint mobilization guides.</p>
+              </div>
+            </div>
+
+            <div class="faq-item glass">
+              <button class="faq-trigger" onclick="toggleFaq(this)">
+                <span>Can I replace recipes I don't like?</span>
+                <i data-lucide="chevron-down"></i>
+              </button>
+              <div class="faq-content">
+                <p>Absolutely. In the Nutrition view, clicking "Replace Meal" tells FitGenie to generate alternate recipes conforming exactly to your allergies, macros target, and cooking style. It updates your shopping list automatically.</p>
+              </div>
+            </div>
+
+            <div class="faq-item glass">
+              <button class="faq-trigger" onclick="toggleFaq(this)">
+                <span>Is my information secure?</span>
+                <i data-lucide="chevron-down"></i>
+              </button>
+              <div class="faq-content">
+                <p>Yes. In this browser setup, your metrics are saved safely in your own browser's local sandbox storage. We do not sell or track your private biometric records.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Landing Footer -->
+      <section class="cta-section">
+        <div class="container text-center">
+          <h2>Transform Your Fitness with FitGenie AI</h2>
+          <p>Get a custom workout and meal structure in under 3 minutes.</p>
+          <button class="btn btn-primary btn-lg" onclick="showAuth('signup')">Create Your Custom Plan <i data-lucide="sparkles"></i></button>
+        </div>
+      </section>
+
+      <!-- Landing Footer -->
+      <footer class="landing-footer">
+        <div class="container">
+          <div class="footer-grid">
+            <div class="footer-brand">
+              <div class="logo-container">
+                <div class="logo-icon"><i data-lucide="wand-2"></i></div>
+                <span class="logo-text">FitGenie <span>AI</span></span>
+              </div>
+              <p>Personalized workout dynamics and tailored diet recipes computed for your lifestyle.</p>
+            </div>
+            <div>
+              <h4>Product</h4>
+              <a href="#features">Features</a>
+              <a href="#pricing">Pricing</a>
+              <a href="#faq">FAQ</a>
+            </div>
+            <div>
+              <h4>Company</h4>
+              <a href="#">About Us</a>
+              <a href="#">Careers</a>
+              <a href="#">Privacy Policy</a>
+            </div>
+            <div>
+              <h4>Connect</h4>
+              <a href="#">Twitter</a>
+              <a href="#">Instagram</a>
+              <a href="#">Contact Support</a>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>&copy; 2026 FitGenie AI. Designed with Apple Aesthetics.</p>
+            <div class="footer-theme-toggle">
+              <button class="btn-theme-selector" onclick="toggleTheme()"><i data-lucide="sun-moon"></i> Switch Theme</button>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ==================== AUTH SCREEN ==================== -->
+    <div id="screen-auth" class="screen">
+      <!-- Background floating gradient blobs -->
+      <div class="bg-blobs-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+      </div>
+      
+      <div class="auth-wrapper glass hover-glow">
+        <button class="auth-close-btn" onclick="showLanding()"><i data-lucide="x"></i></button>
+        
+        <!-- Login Card -->
+        <div id="auth-login-card">
+          <h2 class="auth-title">Welcome Back</h2>
+          <p class="auth-subtitle">Continue your AI fitness journey.</p>
+          
+          <form id="form-login" onsubmit="handleLogin(event)">
+            <!-- Email Input -->
+            <div class="input-floating-group icon-left">
+              <i data-lucide="mail" class="input-icon"></i>
+              <input type="email" id="login-email" required placeholder=" " oninput="validateEmailField(this)">
+              <label for="login-email">Email Address</label>
+              <span class="floating-focus-line"></span>
+              <span class="validation-status">
+                <i data-lucide="check" class="success-icon hidden"></i>
+                <i data-lucide="alert-circle" class="error-icon hidden"></i>
+              </span>
+              <span class="field-error-msg"></span>
+            </div>
+
+            <!-- Password Input -->
+            <div class="input-floating-group icon-left eye-toggle-inside mt-4">
+              <i data-lucide="lock" class="input-icon"></i>
+              <input type="password" id="login-password" required placeholder=" " oninput="validatePasswordField(this)">
+              <label for="login-password">Password</label>
+              <button type="button" class="pwd-toggle-inside" onclick="togglePasswordVisibilityInside('login-password')">
+                <i data-lucide="eye" id="eye-icon-login-password"></i>
+              </button>
+              <span class="floating-focus-line"></span>
+              <span class="validation-status">
+                <i data-lucide="check" class="success-icon hidden"></i>
+                <i data-lucide="alert-circle" class="error-icon hidden"></i>
+              </span>
+              <span class="field-error-msg"></span>
+            </div>
+
+            <div class="forgot-row mt-3 text-right">
+              <a href="#" onclick="switchAuthView('forgot')" class="forgot-link">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full btn-lg mt-4" id="btn-login-submit">
+              <span class="btn-text-label">Sign In</span>
+              <span class="btn-loading-spinner hidden"></span>
+            </button>
+          </form>
+
+          <div class="auth-separator">──────── OR ────────</div>
+
+          <!-- Social Buttons -->
+          <div class="social-auth-buttons">
+            <button type="button" class="btn btn-outline w-full glass hover-lift" onclick="handleSocialMock('Google')">
+              <svg class="social-logo" viewBox="0 0 24 24" width="18" height="18"><path fill="#EA4335" d="M12 5.04c1.7 0 3.2.6 4.4 1.7l3.3-3.3c-2-1.9-4.7-3-7.7-3C7.4.4 3.4 3 1.2 6.8l3.9 3c1-2.9 3.7-4.8 6.9-4.8z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.7-.2-2.5H12v4.8h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.8 3c2.2-2 3.6-5 3.6-9z"/><path fill="#FBBC05" d="M5.1 14.8c-.3-.8-.4-1.7-.4-2.8s.1-2 .4-2.8L1.2 6.2C.4 7.9 0 9.9 0 12s.4 4.1 1.2 5.8l3.9-3z"/><path fill="#34A853" d="M12 23.6c3.2 0 6-1.1 7.9-3l-3.8-3c-1.1.7-2.5 1.2-4.1 1.2-3.2 0-5.9-1.9-6.9-4.8H1.2v3c2.2 3.8 6.2 6.4 10.8 6.4z"/></svg>
+              Continue with Google
+            </button>
+            <button type="button" class="btn btn-outline w-full glass hover-lift mt-2" onclick="handleSocialMock('Apple')">
+              <svg class="social-logo" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.22.67-2.94 1.51-.62.72-1.16 1.87-1.02 2.98.66.02 1.9-.38 2.97-1.43z"/></svg>
+              Continue with Apple
+            </button>
+          </div>
+
+          <p class="auth-footer-text mt-4">Don't have an account? <a href="#" onclick="switchAuthView('signup')">Create Account</a></p>
+        </div>
+
+        <!-- Signup Card -->
+        <div id="auth-signup-card" class="hidden">
+          <h2 class="auth-title">Create Account</h2>
+          <p class="auth-subtitle">Begin your personalized fitness journey</p>
+          
+          <form id="form-signup" onsubmit="handleSignup(event)">
+            <!-- Name Input -->
+            <div class="input-floating-group icon-left">
+              <i data-lucide="user" class="input-icon"></i>
+              <input type="text" id="signup-name" required placeholder=" " oninput="validateNameField(this)">
+              <label for="signup-name">Full Name</label>
+              <span class="floating-focus-line"></span>
+              <span class="validation-status">
+                <i data-lucide="check" class="success-icon hidden"></i>
+                <i data-lucide="alert-circle" class="error-icon hidden"></i>
+              </span>
+              <span class="field-error-msg"></span>
+            </div>
+
+            <!-- Email Input -->
+            <div class="input-floating-group icon-left mt-4">
+              <i data-lucide="mail" class="input-icon"></i>
+              <input type="email" id="signup-email" required placeholder=" " oninput="validateEmailField(this)">
+              <label for="signup-email">Email Address</label>
+              <span class="floating-focus-line"></span>
+              <span class="validation-status">
+                <i data-lucide="check" class="success-icon hidden"></i>
+                <i data-lucide="alert-circle" class="error-icon hidden"></i>
+              </span>
+              <span class="field-error-msg"></span>
+            </div>
+
+            <!-- Password Input -->
+            <div class="input-floating-group icon-left eye-toggle-inside mt-4">
+              <i data-lucide="lock" class="input-icon"></i>
+              <input type="password" id="signup-password" required placeholder=" " oninput="validatePasswordField(this)">
+              <label for="signup-password">Password</label>
+              <button type="button" class="pwd-toggle-inside" onclick="togglePasswordVisibilityInside('signup-password')">
+                <i data-lucide="eye" id="eye-icon-signup-password"></i>
+              </button>
+              <span class="floating-focus-line"></span>
+              <span class="validation-status">
+                <i data-lucide="check" class="success-icon hidden"></i>
+                <i data-lucide="alert-circle" class="error-icon hidden"></i>
+              </span>
+              <span class="field-error-msg"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full btn-lg mt-6" id="btn-signup-submit">
+              <span class="btn-text-label">Create Account</span>
+              <span class="btn-loading-spinner hidden"></span>
+            </button>
+          </form>
+
+          <div class="auth-separator">──────── OR ────────</div>
+
+          <!-- Social Buttons -->
+          <div class="social-auth-buttons">
+            <button type="button" class="btn btn-outline w-full glass hover-lift" onclick="handleSocialMock('Google')">
+              <svg class="social-logo" viewBox="0 0 24 24" width="18" height="18"><path fill="#EA4335" d="M12 5.04c1.7 0 3.2.6 4.4 1.7l3.3-3.3c-2-1.9-4.7-3-7.7-3C7.4.4 3.4 3 1.2 6.8l3.9 3c1-2.9 3.7-4.8 6.9-4.8z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.7-.2-2.5H12v4.8h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.8 3c2.2-2 3.6-5 3.6-9z"/><path fill="#FBBC05" d="M5.1 14.8c-.3-.8-.4-1.7-.4-2.8s.1-2 .4-2.8L1.2 6.2C.4 7.9 0 9.9 0 12s.4 4.1 1.2 5.8l3.9-3z"/><path fill="#34A853" d="M12 23.6c3.2 0 6-1.1 7.9-3l-3.8-3c-1.1.7-2.5 1.2-4.1 1.2-3.2 0-5.9-1.9-6.9-4.8H1.2v3c2.2 3.8 6.2 6.4 10.8 6.4z"/></svg>
+              Continue with Google
+            </button>
+          </div>
+
+          <p class="auth-footer-text mt-4">Already have an account? <a href="#" onclick="switchAuthView('login')">Sign In</a></p>
+        </div>
+
+        <!-- Forgot Password Card -->
+        <div id="auth-forgot-card" class="hidden">
+          <h2 class="auth-title">Reset Password</h2>
+          <p class="auth-subtitle">Enter your email and we'll send reset instructions</p>
+          
+          <form id="form-forgot" onsubmit="handleForgot(event)">
+            <!-- Email Input -->
+            <div class="input-floating-group icon-left">
+              <i data-lucide="mail" class="input-icon"></i>
+              <input type="email" id="forgot-email" required placeholder=" " oninput="validateEmailField(this)">
+              <label for="forgot-email">Email Address</label>
+              <span class="floating-focus-line"></span>
+              <span class="validation-status">
+                <i data-lucide="check" class="success-icon hidden"></i>
+                <i data-lucide="alert-circle" class="error-icon hidden"></i>
+              </span>
+              <span class="field-error-msg"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full btn-lg mt-6" id="btn-forgot-submit">
+              <span class="btn-text-label">Send Recovery Email</span>
+              <span class="btn-loading-spinner hidden"></span>
+            </button>
+          </form>
+          <p class="auth-footer-text mt-4">Back to <a href="#" onclick="switchAuthView('login')">Sign In</a></p>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="layout-onboarding">
+    <!-- ==================== ONBOARDING SCREEN ==================== -->
+    <div id="screen-onboarding" class="screen active">
+      <div class="onboarding-split-layout">
+        
+        <!-- Left Panel: Dynamic Bio Metrics Calculator -->
+        <div class="onboarding-left-panel">
+          <div class="left-panel-glow"></div>
+          <div class="left-panel-content">
+            <div class="logo-container">
+              <div class="logo-icon"><i data-lucide="wand-2"></i></div>
+              <span class="logo-text">FitGenie <span>AI</span></span>
+            </div>
+            
+            <div class="calculator-card glass mt-6">
+              <h3 class="gradient-text"><i data-lucide="calculator" class="inline-icon"></i> Live Bio-Calculator</h3>
+              <p class="small-label">Calculated dynamically based on your physical metrics input</p>
+              
+              <div class="calc-metrics-grid mt-4">
+                <div class="calc-item">
+                  <span class="calc-label">Est. BMR</span>
+                  <h2 id="calc-bmr" class="font-header">1,650 <span class="calc-unit">kcal</span></h2>
+                  <p class="small-label">Basal Metabolism</p>
+                </div>
+                <div class="calc-item">
+                  <span class="calc-label">Est. TDEE</span>
+                  <h2 id="calc-tdee" class="font-header">2,200 <span class="calc-unit">kcal</span></h2>
+                  <p class="small-label">Total Daily Energy</p>
+                </div>
+                <div class="calc-item full-width mt-3">
+                  <span class="calc-label">Daily Target Calories</span>
+                  <h2 id="calc-target" class="font-header text-success">2,000 <span class="calc-unit">kcal</span></h2>
+                  <p class="small-label">Adjusted for your specific fitness goal</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="coach-quote-box glass mt-6">
+              <p id="onboarding-coach-tip">"Every step closer is a building block for your new lifestyle. Let's calibrate your nutrition metrics accurately."</p>
+              <div class="quote-author mt-2">
+                <div class="mini-coach-avatar"><i data-lucide="wand-2"></i></div>
+                <span>Genie AI Coach</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Panel: Full-screen Glassmorphic Steps -->
+        <div class="onboarding-right-panel">
+          <div class="onboarding-right-container glass hover-glow">
+            
+            <!-- Premium Step Progress Indicator -->
+            <div class="premium-progress-indicator">
+              <div class="progress-steps-row">
+                <div class="progress-step-node active" id="prog-node-1" onclick="jumpToOnboardingStep(1)">
+                  <span class="node-dot"></span>
+                  <span class="node-label">Bio Profile</span>
+                </div>
+                <div class="progress-line" id="prog-line-1"></div>
+                <div class="progress-step-node" id="prog-node-2" onclick="jumpToOnboardingStep(2)">
+                  <span class="node-dot"></span>
+                  <span class="node-label">Goals</span>
+                </div>
+                <div class="progress-line" id="prog-line-2"></div>
+                <div class="progress-step-node" id="prog-node-3" onclick="jumpToOnboardingStep(3)">
+                  <span class="node-dot"></span>
+                  <span class="node-label">Lifestyle</span>
+                </div>
+                <div class="progress-line" id="prog-line-3"></div>
+                <div class="progress-step-node" id="prog-node-4" onclick="jumpToOnboardingStep(4)">
+                  <span class="node-dot"></span>
+                  <span class="node-label">Review</span>
+                </div>
+              </div>
+              <div class="progress-pct-indicator font-header" id="onboarding-pct-text">25%</div>
+            </div>
+
+            <!-- Onboarding Form Form -->
+            <form id="form-onboarding" onsubmit="handleOnboardingSubmit(event)" novalidate>
+              
+              <!-- STEP 1: Personal Information -->
+              <div class="onboarding-step-view active" id="onboard-step1">
+                <h2>Let's build your physical profile</h2>
+                <p class="step-desc">Provide your metrics to establish baseline caloric and metabolic parameters.</p>
+                
+                <div class="step-fields-layout">
+                  <!-- Age Floating Input -->
+                  <div class="input-floating-group icon-left">
+                    <i data-lucide="calendar" class="input-icon"></i>
+                    <input type="number" id="ob-age" min="12" max="100" placeholder=" " oninput="syncLiveBmrCalculator(); validateNumericField(this, 12, 100);">
+                    <label for="ob-age">Age (years)</label>
+                    <span class="floating-focus-line"></span>
+                    <span class="validation-status">
+                      <i data-lucide="check" class="success-icon hidden"></i>
+                      <i data-lucide="alert-circle" class="error-icon hidden"></i>
+                    </span>
+                    <span class="field-error-msg"></span>
+                  </div>
+
+                  <!-- Gender choice cards grid -->
+                  <div class="input-card-group">
+                    <label class="field-section-label">Select Gender</label>
+                    <div class="choice-cards-grid" data-input-id="ob-gender">
+                      <div class="choice-card clickable-card" data-value="Male">
+                        <i data-lucide="user"></i>
+                        <span>Male</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Female">
+                        <i data-lucide="user-round"></i>
+                        <span>Female</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Non-binary">
+                        <i data-lucide="users"></i>
+                        <span>Non-binary</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Prefer not to say">
+                        <i data-lucide="user-x"></i>
+                        <span>Decline</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="ob-gender" required>
+                  </div>
+
+                  <div class="flex-fields-row">
+                    <!-- Height Floating Input -->
+                    <div class="input-floating-group icon-left">
+                      <i data-lucide="ruler" class="input-icon"></i>
+                      <input type="number" id="ob-height" min="100" max="250" placeholder=" " oninput="syncLiveBmrCalculator(); validateNumericField(this, 100, 250);">
+                      <label for="ob-height">Height (cm)</label>
+                      <span class="floating-focus-line"></span>
+                      <span class="validation-status">
+                        <i data-lucide="check" class="success-icon hidden"></i>
+                        <i data-lucide="alert-circle" class="error-icon hidden"></i>
+                      </span>
+                      <span class="field-error-msg"></span>
+                    </div>
+
+                    <!-- Weight Floating Input -->
+                    <div class="input-floating-group icon-left">
+                      <i data-lucide="scale" class="input-icon"></i>
+                      <input type="number" id="ob-weight" min="30" max="250" placeholder=" " step="0.1" oninput="syncLiveBmrCalculator(); validateNumericField(this, 30, 250);">
+                      <label for="ob-weight">Weight (kg)</label>
+                      <span class="floating-focus-line"></span>
+                      <span class="validation-status">
+                        <i data-lucide="check" class="success-icon hidden"></i>
+                        <i data-lucide="alert-circle" class="error-icon hidden"></i>
+                      </span>
+                      <span class="field-error-msg"></span>
+                    </div>
+                  </div>
+
+                  <!-- Body Fat % Input -->
+                  <div class="input-floating-group icon-left">
+                    <i data-lucide="percent" class="input-icon"></i>
+                    <input type="number" id="ob-bodyfat" min="3" max="60" placeholder=" " step="0.1" oninput="validateNumericField(this, 3, 60);">
+                    <label for="ob-bodyfat">Body Fat % (Optional)</label>
+                    <span class="floating-focus-line"></span>
+                    <span class="validation-status">
+                      <i data-lucide="check" class="success-icon hidden"></i>
+                      <i data-lucide="alert-circle" class="error-icon hidden"></i>
+                    </span>
+                    <span class="field-error-msg"></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- STEP 2: Fitness Goals -->
+              <div class="onboarding-step-view" id="onboard-step2">
+                <h2>Define your fitness goals</h2>
+                <p class="step-desc">Tell us what you want to achieve and what setup you have access to.</p>
+                
+                <div class="step-fields-layout">
+                  <!-- Goal selection cards -->
+                  <div class="input-card-group">
+                    <label class="field-section-label">Select Goal</label>
+                    <div class="choice-cards-grid text-left" data-input-id="ob-goal">
+                      <div class="choice-card clickable-card" data-value="Build Muscle" onclick="syncLiveBmrCalculator()">
+                        <i data-lucide="dumbbell"></i>
+                        <div>
+                          <strong>Build Muscle & Strength</strong>
+                          <p class="small-label">Focus on hypertrophy & power lifiting</p>
+                        </div>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Lose Weight" onclick="syncLiveBmrCalculator()">
+                        <i data-lucide="flame"></i>
+                        <div>
+                          <strong>Lose Weight & Fat</strong>
+                          <p class="small-label">Caloric deficit & intense cardio circuits</p>
+                        </div>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Maintain" onclick="syncLiveBmrCalculator()">
+                        <i data-lucide="activity"></i>
+                        <div>
+                          <strong>Maintain Fitness & Tone</strong>
+                          <p class="small-label">Sustain weight, build stamina & clean tone</p>
+                        </div>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Athletic Performance" onclick="syncLiveBmrCalculator()">
+                        <i data-lucide="zap"></i>
+                        <div>
+                          <strong>Athletic Performance</strong>
+                          <p class="small-label">Optimize speed, explosiveness & recovery</p>
+                        </div>
+                      </div>
+                    </div>
+                    <input type="hidden" id="ob-goal" required>
+                  </div>
+
+                  <!-- Fitness Level visual choice -->
+                  <div class="input-card-group">
+                    <label class="field-section-label">Current Fitness Level</label>
+                    <div class="choice-cards-grid" data-input-id="ob-level">
+                      <div class="choice-card clickable-card" data-value="Beginner">
+                        <span>Beginner</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Intermediate">
+                        <span>Intermediate</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Advanced">
+                        <span>Advanced</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="ob-level" required>
+                  </div>
+
+                  <!-- Workout Style Preference selection chips -->
+                  <div class="input-card-group">
+                    <label class="field-section-label">Workout Preference</label>
+                    <div class="choice-cards-grid" data-input-id="ob-pref">
+                      <div class="choice-card clickable-card" data-value="Strength">
+                        <span>Weights</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="HIIT">
+                        <span>HIIT Cardio</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Calisthenics">
+                        <span>Calisthenics</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Yoga-Pilates">
+                        <span>Yoga-Pilates</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="ob-pref" required>
+                  </div>
+
+                  <!-- Available Equipment visual selection cards -->
+                  <div class="input-card-group">
+                    <label class="field-section-label">Available Equipment</label>
+                    <div class="choice-cards-grid" data-input-id="ob-equip">
+                      <div class="choice-card clickable-card" data-value="Full Gym">
+                        <i data-lucide="building"></i>
+                        <span>Full Gym</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Dumbbells Only">
+                        <i data-lucide="dumbbell"></i>
+                        <span>Dumbbells & Bands</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Bodyweight Only">
+                        <i data-lucide="smile"></i>
+                        <span>Bodyweight Only</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="ob-equip" required>
+                  </div>
+
+                  <!-- Workout Days visual days count selection chips -->
+                  <div class="input-card-group">
+                    <label class="field-section-label">Workout Days per Week</label>
+                    <div class="choice-cards-grid" data-input-id="ob-days">
+                      <div class="choice-card clickable-card" data-value="2">
+                        <span>2 Days</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="3">
+                        <span>3 Days</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="4">
+                        <span>4 Days</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="5">
+                        <span>5 Days</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="ob-days" required>
+                  </div>
+
+                  <!-- Hidden Duration holder -->
+                  <input type="hidden" id="ob-duration" value="45">
+                </div>
+              </div>
+
+              <!-- STEP 3: Nutrition & Lifestyle -->
+              <div class="onboarding-step-view" id="onboard-step3">
+                <h2>Dietetics & Lifestyle Metrics</h2>
+                <p class="step-desc">Tell us what fuels you eat, active sleep habits, and health variables.</p>
+                
+                <div class="step-fields-layout">
+                  <!-- Diet Preference selection pill buttons -->
+                  <div class="input-card-group">
+                    <label class="field-section-label">Diet Preference</label>
+                    <div class="choice-cards-grid" data-input-id="ob-diet">
+                      <div class="choice-card clickable-card" data-value="Standard/Balanced">
+                        <span>Standard / Balanced</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="High Protein">
+                        <span>High Protein</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Keto/Low Carb">
+                        <span>Keto / Low Carb</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Vegetarian">
+                        <span>Vegetarian</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Vegan">
+                        <span>Vegan</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Mediterranean">
+                        <span>Mediterranean</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="ob-diet" required>
+                  </div>
+
+                  <!-- Floating label Allergies input -->
+                  <div class="input-floating-group icon-left">
+                    <i data-lucide="shield-alert" class="input-icon"></i>
+                    <input type="text" id="ob-allergies" placeholder=" ">
+                    <label for="ob-allergies">Allergies / Dislikes (Optional)</label>
+                    <span class="floating-focus-line"></span>
+                    <span class="validation-status">
+                      <i data-lucide="check" class="success-icon hidden"></i>
+                    </span>
+                  </div>
+
+                  <!-- Sleep Hours Custom Slider -->
+                  <div class="input-card-group">
+                    <label class="field-section-label">Average Sleep (Hours)</label>
+                    <div class="custom-range-slider">
+                      <input type="range" id="ob-sleep" min="4" max="12" value="7" oninput="updateRangeBubble('ob-sleep', this.value, 'hours')">
+                      <span class="range-bubble" id="bubble-ob-sleep">7 hours</span>
+                    </div>
+                  </div>
+
+                  <!-- Water Target Custom Slider -->
+                  <div class="input-card-group">
+                    <label class="field-section-label">Daily Water Target (Liters)</label>
+                    <div class="custom-range-slider">
+                      <input type="range" id="ob-water" min="1" max="6" value="3" step="0.5" oninput="updateRangeBubble('ob-water', this.value, 'L')">
+                      <span class="range-bubble" id="bubble-ob-water">3.0 L</span>
+                    </div>
+                  </div>
+
+                  <!-- Activity level selectable visual cards -->
+                  <div class="input-card-group">
+                    <label class="field-section-label">Daily Activity Level</label>
+                    <div class="choice-cards-grid text-left" data-input-id="ob-activity">
+                      <div class="choice-card clickable-card" data-value="Sedentary" onclick="syncLiveBmrCalculator()">
+                        <i data-lucide="computer"></i>
+                        <div>
+                          <strong>Sedentary</strong>
+                          <p class="small-label">Desk job, low activity</p>
+                        </div>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Lightly Active" onclick="syncLiveBmrCalculator()">
+                        <i data-lucide="footprints"></i>
+                        <div>
+                          <strong>Lightly Active</strong>
+                          <p class="small-label">Light walking, house chores</p>
+                        </div>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Moderately Active" onclick="syncLiveBmrCalculator()">
+                        <i data-lucide="bike"></i>
+                        <div>
+                          <strong>Moderately Active</strong>
+                          <p class="small-label">Active standing, regular walking</p>
+                        </div>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Very Active" onclick="syncLiveBmrCalculator()">
+                        <i data-lucide="flame"></i>
+                        <div>
+                          <strong>Very Active</strong>
+                          <p class="small-label">Heavy labor or double training</p>
+                        </div>
+                      </div>
+                    </div>
+                    <input type="hidden" id="ob-activity" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- STEP 4: Medical & AI Summary Review -->
+              <div class="onboarding-step-view" id="onboard-step4">
+                <h2>Medical & Plan Summary</h2>
+                <p class="step-desc">Verify your bio-markers configuration details before generating your plan.</p>
+                
+                <div class="step-fields-layout">
+                  <!-- Injuries Floating input -->
+                  <div class="input-floating-group icon-left">
+                    <i data-lucide="activity" class="input-icon"></i>
+                    <input type="text" id="ob-injuries" placeholder=" ">
+                    <label for="ob-injuries">Active Injuries / Sore joints (Optional)</label>
+                    <span class="floating-focus-line"></span>
+                    <span class="validation-status">
+                      <i data-lucide="check" class="success-icon hidden"></i>
+                    </span>
+                  </div>
+
+                  <!-- Medical Floating input -->
+                  <div class="input-floating-group icon-left">
+                    <i data-lucide="heart" class="input-icon"></i>
+                    <input type="text" id="ob-medical" placeholder=" ">
+                    <label for="ob-medical">Medical Conditions (Optional)</label>
+                    <span class="floating-focus-line"></span>
+                    <span class="validation-status">
+                      <i data-lucide="check" class="success-icon hidden"></i>
+                    </span>
+                  </div>
+
+                  <!-- Summary review list cards -->
+                  <div class="input-card-group">
+                    <label class="field-section-label">Summary Details (Click any to edit)</label>
+                    <div class="onboarding-summary-review glass">
+                      <div class="summary-item" onclick="jumpToOnboardingStep(1)">
+                        <span class="summary-label">Biological Stats</span>
+                        <span class="summary-val" id="sum-stats">Age: -- | -- | -- cm | -- kg</span>
+                        <i data-lucide="chevron-right" class="summary-edit-icon"></i>
+                      </div>
+                      <div class="summary-item" onclick="jumpToOnboardingStep(2)">
+                        <span class="summary-label">Fitness Goals</span>
+                        <span class="summary-val" id="sum-goals">Goal: -- | Level: -- | Gym</span>
+                        <i data-lucide="chevron-right" class="summary-edit-icon"></i>
+                      </div>
+                      <div class="summary-item" onclick="jumpToOnboardingStep(3)">
+                        <span class="summary-label">Dietetics & Fuel</span>
+                        <span class="summary-val" id="sum-diet">Diet: -- | Sleep: --h | --L Water</span>
+                        <i data-lucide="chevron-right" class="summary-edit-icon"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Navigation footer -->
+              <div class="onboarding-buttons mt-6">
+                <button type="button" class="btn btn-outline glass" id="onboarding-prev-btn" onclick="onboardingBack()" style="visibility: hidden;"><i data-lucide="arrow-left"></i> Back</button>
+                <button type="button" class="btn btn-primary" id="onboarding-next-btn" onclick="onboardingNext()">Next <i data-lucide="arrow-right"></i></button>
+                <button type="submit" class="btn btn-primary hidden" id="onboarding-submit-btn">
+                  <span class="btn-text-label">Generate My AI Plan <i data-lucide="sparkles"></i></span>
+                  <span class="btn-loading-spinner hidden"></span>
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulator Loading Overlay -->
+      <div id="onboarding-loading-overlay" class="onboarding-loading-overlay hidden">
+        <div class="loader-box glass">
+          <div class="pulse-ring"></div>
+          <div class="loader-icon"><i data-lucide="cpu"></i></div>
+          <h3 id="loader-title">Synthesizing Onboarding Details...</h3>
+          <p id="loader-subtitle" class="fade-text">Running custom biological metrics algorithms...</p>
+          <div class="step-bullets">
+            <span class="bullet active" id="loader-bullet-1"></span>
+            <span class="bullet" id="loader-bullet-2"></span>
+            <span class="bullet" id="loader-bullet-3"></span>
+            <span class="bullet" id="loader-bullet-4"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="layout-protected">
+    <!-- ==================== MAIN APPLICATION CONTAINER ==================== -->
+    <div id="screen-app" class="screen">
+      <!-- Sidebar Navigation -->
+      <aside class="app-sidebar glass">
+        <div class="sidebar-header">
+          <div class="logo-container">
+            <div class="logo-icon"><i data-lucide="wand-2"></i></div>
+            <span class="logo-text">FitGenie <span>AI</span></span>
+          </div>
+          <button class="mobile-sidebar-close" onclick="toggleMobileSidebar()"><i data-lucide="x"></i></button>
+        </div>
+        
+        <nav class="sidebar-nav">
+          <a href="#dashboard" class="nav-item active" onclick="navigate('dashboard')"><i data-lucide="layout-dashboard"></i> <span>Dashboard</span></a>
+          <a href="#workout" class="nav-item" onclick="navigate('workout')"><i data-lucide="dumbbell"></i> <span>Workout Plan</span></a>
+          <a href="#nutrition" class="nav-item" onclick="navigate('nutrition')"><i data-lucide="salad"></i> <span>Nutrition</span></a>
+          <a href="#grocery" class="nav-item" onclick="navigate('grocery')"><i data-lucide="shopping-basket"></i> <span>Grocery List</span></a>
+          <a href="#wearables" class="nav-item" onclick="navigate('wearables')"><i data-lucide="watch"></i> <span>Wearables Hub</span></a>
+          <a href="#chat" class="nav-item" onclick="navigate('chat')"><i data-lucide="messages-square"></i> <span>AI Coach</span></a>
+          <a href="#progress" class="nav-item" onclick="navigate('progress')"><i data-lucide="trending-up"></i> <span>Analytics</span></a>
+          <a href="#injury" class="nav-item" onclick="navigate('injury')"><i data-lucide="heart-pulse"></i> <span>Injury Rehab</span></a>
+          <a href="#achievements" class="nav-item" onclick="navigate('achievements')"><i data-lucide="trophy"></i> <span>Achievements</span></a>
+          <a href="#profile" class="nav-item" onclick="navigate('profile')"><i data-lucide="user-cog"></i> <span>Profile</span></a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="user-block">
+            <div class="user-avatar" id="app-user-avatar">AM</div>
+            <div class="user-info">
+              <h4 id="app-user-name">Alex Mercer</h4>
+              <p>Genie Pro Member</p>
+            </div>
+          </div>
+          <button class="logout-btn" onclick="handleLogout()"><i data-lucide="log-out"></i> Logout</button>
+        </div>
+      </aside>
+
+      <!-- Main Panel Wrapper -->
+      <main class="app-main">
+        <!-- 1. Top Navigation Bar -->
+        <div class="app-top-nav glass" id="app-top-nav">
+          <div class="search-and-command">
+            <button class="mobile-sidebar-toggle" onclick="toggleMobileSidebar()"><i data-lucide="menu"></i></button>
+            <div class="search-input-wrapper">
+              <i data-lucide="search"></i>
+              <input type="text" id="global-search-input" placeholder="Search features, exercises, recipes..." oninput="handleGlobalSearch(this.value)">
+              <!-- Search Dropdown Suggestion Overlay -->
+              <div id="global-search-dropdown" class="global-search-dropdown glass hidden" onclick="event.stopPropagation()">
+                <!-- Loaded dynamically -->
+              </div>
+            </div>
+            <button class="btn btn-sm glass cmd-palette-btn" onclick="openCommandPalette()"><kbd>⌘K</kbd></button>
+          </div>
+          
+          <div class="top-bar-right">
+            <div class="weather-time-widget">
+              <span class="weather-item"><i data-lucide="sun" class="warning"></i> 78°F Sunny</span>
+              <span class="divider">•</span>
+              <span class="time-item" id="hero-clock">July 7, 14:09</span>
+            </div>
+            
+            <div class="notification-container">
+              <button class="notification-bell-btn" onclick="toggleNotificationsModal(event)">
+                <i data-lucide="bell"></i>
+                <span class="notification-badge" id="hero-notif-badge">2</span>
+              </button>
+              <!-- Mini Notifications Dropdown -->
+              <div id="notifications-modal" class="notifications-dropdown glass hidden" onclick="event.stopPropagation()">
+                <div class="notif-dropdown-header">
+                  <h4>Notifications</h4>
+                  <button class="btn-text btn-sm" onclick="clearNotifications()">Clear All</button>
+                </div>
+                <div class="notif-list" id="hero-notif-list">
+                  <!-- Filled via JS -->
+                </div>
+              </div>
+            </div>
+            <div class="user-avatar-mini" onclick="navigate('profile')" id="hero-user-avatar">AM</div>
+          </div>
+        </div>
+
+        <!-- 2. Dynamic Page Header -->
+        <div class="app-page-header glass animate-hero" id="app-page-header">
+          <div class="hero-main-area">
+            <div class="hero-text-block">
+              <div class="breadcrumbs" id="hero-breadcrumbs">FitGenie &gt; Dashboard</div>
+              <h1 class="hero-title" id="hero-title">Dashboard</h1>
+              <p class="hero-desc" id="hero-desc">Your daily AI fitness analytics, macros progress, and workout trackers.</p>
+              
+              <!-- AI Insight Card -->
+              <div class="hero-ai-insight glass">
+                <i data-lucide="sparkles" class="ai-sparkle-icon"></i>
+                <div class="insight-content">
+                  <strong>Genie AI Insight:</strong>
+                  <span id="hero-insight-text">Loading insights...</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-actions-block" id="hero-actions-container">
+              <!-- Contextual buttons generated via app.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Content Pane -->
+        <div class="app-content-pane">
+          
+          <!-- VIEW: Dashboard -->
+          <div id="view-dashboard" class="app-view active">
+            <!-- Premium Health OS Top Metrics Matrix -->
+            <div class="health-os-stats-banner">
+              <div class="health-os-badge glass hover-glow">
+                <div class="badge-icon primary"><i data-lucide="activity"></i></div>
+                <div class="badge-info">
+                  <span class="small-label">AI Health Score</span>
+                  <h3 id="dash-health-score">84 <span class="calc-unit">/100</span></h3>
+                </div>
+              </div>
+              <div class="health-os-badge glass hover-glow">
+                <div class="badge-icon accent"><i data-lucide="heart-pulse"></i></div>
+                <div class="badge-info">
+                  <span class="small-label">Recovery Score</span>
+                  <h3 id="dash-recovery-score">78%</h3>
+                </div>
+              </div>
+              <div class="health-os-badge glass hover-glow">
+                <div class="badge-icon secondary"><i data-lucide="clock"></i></div>
+                <div class="badge-info">
+                  <span class="small-label">Sleep Score</span>
+                  <h3 id="dash-sleep-score">82%</h3>
+                </div>
+              </div>
+              <div class="health-os-badge glass hover-glow">
+                <div class="badge-icon success"><i data-lucide="zap"></i></div>
+                <div class="badge-info">
+                  <span class="small-label">Readiness Score</span>
+                  <h3 id="dash-readiness-score">80%</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="welcome-banner glass hover-glow mt-6">
+              <div class="welcome-banner-glow"></div>
+              <div class="welcome-banner-content">
+                <h1 id="welcome-text" class="gradient-text">Good morning, Alex</h1>
+                <p>FitGenie Health OS has successfully synchronized your Garmin wearables telemetry details. Sleep recovery looks optimal today.</p>
+              </div>
+              <div class="banner-right">
+                <button class="btn btn-primary" onclick="navigate('checkin')"><i data-lucide="check-square"></i> Complete Check-In</button>
+              </div>
+            </div>
+
+            <!-- Stats Row Widgets -->
+            <div class="stats-overview-grid mt-6">
+              <div class="stat-widget-card glass hover-glow">
+                <div class="widget-header">
+                  <span>Calories Eaten</span>
+                  <i data-lucide="flame" class="accent"></i>
+                </div>
+                <div class="widget-body">
+                  <div class="circular-progress">
+                    <svg viewBox="0 0 36 36" class="circular-chart">
+                      <defs>
+                        <linearGradient id="calGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stop-color="var(--accent)"/>
+                          <stop offset="100%" stop-color="#FF4F5A"/>
+                        </linearGradient>
+                      </defs>
+                      <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      <path class="circle" id="calorie-progress-path" stroke="url(#calGrad2)" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <div class="percentage font-header" id="dash-calories-text">0 / 2400 kcal</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stat-widget-card glass hover-glow">
+                <div class="widget-header">
+                  <span>Protein Target</span>
+                  <i data-lucide="drumstick" class="primary"></i>
+                </div>
+                <div class="widget-body">
+                  <div class="linear-progress-box">
+                    <div class="linear-progress-bar">
+                      <div class="linear-progress-fill" id="protein-progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="label-row mt-2">
+                      <span id="dash-protein-text">0g / 150g</span>
+                      <span id="dash-protein-pct">0%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stat-widget-card glass hover-glow">
+                <div class="widget-header">
+                  <span>Water Tracker</span>
+                  <i data-lucide="cup-soda" class="secondary"></i>
+                </div>
+                <div class="widget-body text-center">
+                  <div class="water-widget">
+                    <span class="water-count font-header" id="dash-water-text">0.0L / 3.0L</span>
+                    <div class="water-controls">
+                      <button class="btn-water-add glass" onclick="incrementWater()"><i data-lucide="plus"></i> Add Glass (250ml)</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stat-widget-card glass hover-glow">
+                <div class="widget-header">
+                  <span>Body Analytics</span>
+                  <i data-lucide="scale"></i>
+                </div>
+                <div class="widget-body">
+                  <div class="analytics-stat-row">
+                    <div>
+                      <p class="small-label">Weight</p>
+                      <h4 id="dash-weight-val" class="font-header">72.0 kg</h4>
+                    </div>
+                    <div>
+                      <p class="small-label">BMI</p>
+                      <h4 id="dash-bmi-val" class="font-header">23.5</h4>
+                    </div>
+                  </div>
+                  <div class="streak-mini-grid mt-2">
+                    <span class="small-label">Streak Status: <span class="badge accent" id="dash-streak-badge">3 Days 🔥</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Double Column Layout -->
+            <div class="dashboard-double-columns mt-6">
+              <!-- Left Column: Workout & Meals -->
+              <div class="column-left flex flex-column gap-6">
+                <!-- Today's Workout Quick View -->
+                <div class="panel-card glass hover-glow">
+                  <div class="panel-header">
+                    <h3>Today's Workout</h3>
+                    <span class="badge" id="dash-workout-muscle">Full Body</span>
+                  </div>
+                  <div class="panel-body">
+                    <div class="dash-workout-preview" id="dash-workout-preview-box">
+                      <!-- Loaded via JS -->
+                    </div>
+                    <button class="btn btn-primary w-full mt-4" onclick="navigate('workout')">Open Workout Plan <i data-lucide="arrow-right"></i></button>
+                  </div>
+                </div>
+
+                <!-- Today's Meal Quick View -->
+                <div class="panel-card glass hover-glow">
+                  <div class="panel-header">
+                    <h3>Today's Meal Plan</h3>
+                    <span class="badge primary" id="dash-diet-style">Standard</span>
+                  </div>
+                  <div class="panel-body">
+                    <div class="dash-meals-preview" id="dash-meals-preview-box">
+                      <!-- Loaded via JS -->
+                    </div>
+                    <button class="btn btn-outline w-full mt-4" onclick="navigate('nutrition')">Open Nutrition Page <i data-lucide="arrow-right"></i></button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column: Shortcuts & Body Twin -->
+              <div class="column-right flex flex-column gap-6">
+                <!-- AI Body Twin Digital Representation -->
+                <div class="panel-card glass hover-glow" id="dash-body-twin-card">
+                  <div class="panel-header border-bottom">
+                    <h3>AI Body Twin</h3>
+                    <span class="badge primary">Interactive</span>
+                  </div>
+                  <div class="panel-body text-center p-4">
+                    <p class="small-label mb-3">Evolving digital avatar based on muscle splits & weight</p>
+                    
+                    <div class="avatar-svg-glow-container">
+                      <svg width="150" height="240" viewBox="0 0 100 160" class="digital-twin-svg">
+                        <!-- Neon Cyber Grid lines -->
+                        <line x1="10" y1="80" x2="90" y2="80" stroke="rgba(0, 200, 150, 0.1)" stroke-dasharray="2 2" />
+                        <line x1="50" y1="10" x2="50" y2="150" stroke="rgba(0, 200, 150, 0.1)" stroke-dasharray="2 2" />
+                        
+                        <!-- Glowing Body Elements -->
+                        <circle cx="50" cy="15" r="7" class="twin-part glowing-node" id="twin-head" />
+                        <rect x="48" y="22" width="4" height="4" class="twin-part" id="twin-neck" />
+                        <path d="M 38 27 L 62 27 L 60 48 L 40 48 Z" class="twin-part highlight-active" id="twin-chest" />
+                        <circle cx="34" cy="30" r="5" class="twin-part" id="twin-shoulder-l" />
+                        <circle cx="66" cy="30" r="5" class="twin-part" id="twin-shoulder-r" />
+                        <rect x="42" y="50" width="16" height="22" class="twin-part" id="twin-back" />
+                        <circle cx="24" cy="52" r="4.5" class="twin-part" id="twin-elbow-l" />
+                        <circle cx="76" cy="52" r="4.5" class="twin-part" id="twin-elbow-r" />
+                        <circle cx="38" cy="115" r="5" class="twin-part" id="twin-knee-l" />
+                        <circle cx="62" cy="115" r="5" class="twin-part" id="twin-knee-r" />
+                      </svg>
+                    </div>
+
+                    <div class="avatar-meta-pills mt-3 flex justify-center gap-2">
+                      <span class="badge accent">BMI: <strong id="twin-bmi-val">23.5</strong></span>
+                      <span class="badge primary">Muscle Mass: <strong>Normal</strong></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Daily Mission Checklist -->
+                <div class="panel-card glass hover-glow">
+                  <div class="panel-header border-bottom">
+                    <h3>Daily Mission</h3>
+                  </div>
+                  <div class="panel-body flex flex-column gap-3 mt-2">
+                    <label class="custom-checkbox-wrapper">
+                      <input type="checkbox" checked disabled>
+                      <span class="custom-checkbox-box"><i data-lucide="check"></i></span>
+                      <span class="custom-checkbox-label text-secondary">Complete Onboarding Assessment</span>
+                    </label>
+                    <label class="custom-checkbox-wrapper" onclick="event.preventDefault(); navigate('workout');">
+                      <input type="checkbox" id="mission-workout">
+                      <span class="custom-checkbox-box"><i data-lucide="check"></i></span>
+                      <span class="custom-checkbox-label">Log Session Workout</span>
+                    </label>
+                    <label class="custom-checkbox-wrapper" onclick="event.preventDefault(); incrementWater();">
+                      <input type="checkbox" id="mission-water">
+                      <span class="custom-checkbox-box"><i data-lucide="check"></i></span>
+                      <span class="custom-checkbox-label">Complete Water Hydration Target</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VIEW: Workout -->
+          <div id="view-workout" class="app-view">
+            <!-- AI Workout Optimizer Capsule -->
+            <div class="panel-card glass coach-highlight-panel mb-6 w-full">
+              <div class="panel-body flex items-center gap-4">
+                <div class="mini-coach-avatar"><i data-lucide="sparkles"></i></div>
+                <div>
+                  <h4 class="primary-text">AI Workout Optimizer Active</h4>
+                  <p class="small-label" id="workout-optimizer-msg">"No skipped logs detected. Split structure calibrated matching Intermediate level. Adjusting chest rest variables to account for lower back limits."</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="workout-controls-row">
+              <div class="days-tab-nav" id="workout-days-tabs">
+                <!-- Tabs generated dynamically -->
+              </div>
+              <button class="btn btn-primary" onclick="startActiveWorkoutSession()"><i data-lucide="play"></i> Start Daily Workout</button>
+            </div>
+
+            <!-- Workout Details Grid -->
+            <div class="workout-details-layout mt-6">
+              <div class="panel-card glass full-width hover-glow">
+                <div class="panel-header border-bottom">
+                  <div>
+                    <h3 id="workout-day-title">Workout Day 1</h3>
+                    <p class="small-label" id="workout-day-muscle">Target: Chest & Shoulders</p>
+                  </div>
+                  <span class="badge" id="workout-total-time">45 Minutes</span>
+                </div>
+                <div class="panel-body">
+                  <div class="exercises-list-table" id="workout-exercises-container">
+                    <!-- Exercises generated dynamically -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VIEW: Workout Session -->
+          <div id="view-session" class="app-view">
+            <div class="session-container glass hover-glow" style="position: relative; overflow: hidden; min-height: 480px;">
+              
+              <!-- 3-Second Calibration Screen inside panel -->
+              <div id="session-prep-overlay" class="session-prep-overlay hidden">
+                <div class="prep-box text-center">
+                  <div class="prep-spinner"></div>
+                  <h2 class="mt-4">AI Workout Calibration</h2>
+                  <p class="small-label mt-2" id="prep-loader-text">Preparing your personalized workout...</p>
+                  <div class="prep-countdown font-header mt-4" id="prep-countdown-num">3</div>
+                </div>
+              </div>
+
+              <!-- Active Panel -->
+              <div class="session-active-card" id="session-active-card-content">
+                <div class="session-header">
+                  <span class="badge accent" id="session-ex-index">Exercise 1 of 5</span>
+                  <span class="badge" id="session-target-muscle">Target: Chest</span>
+                </div>
+                
+                <h1 id="session-ex-name" class="mt-2 gradient-text">Barbell Bench Press</h1>
+                <p id="session-ex-tips" class="session-tips-box">Keep your elbows at a 45-degree angle. Press straight up while planting your feet firmly.</p>
+                
+                <!-- Large Timer Widget -->
+                <div class="timer-display-box">
+                  <span class="timer-digits font-header" id="session-timer-val">00:00</span>
+                  <div class="timer-controls mt-2">
+                    <button class="btn btn-outline btn-sm glass" id="btn-timer-toggle" onclick="toggleSessionTimer()"><i data-lucide="pause"></i> Pause</button>
+                    <button class="btn btn-outline btn-sm glass" onclick="resetSessionTimer()"><i data-lucide="rotate-ccw"></i> Reset</button>
+                  </div>
+                </div>
+
+                <!-- Input Set Logs -->
+                <div class="set-logger-table mt-6">
+                  <div class="table-header">
+                    <span>Set</span>
+                    <span>Previous Target</span>
+                    <span>Log Weight (kg)</span>
+                    <span>Log Reps</span>
+                    <span>Status</span>
+                  </div>
+                  <div class="table-body" id="session-sets-rows">
+                    <!-- Generated via Javascript -->
+                  </div>
+                </div>
+
+                <!-- Controls Bottom Row -->
+                <div class="session-footer-controls mt-6">
+                  <button class="btn btn-outline glass" id="session-prev-btn" onclick="prevSessionExercise()"><i data-lucide="arrow-left"></i> Previous</button>
+                  <button class="btn btn-accent" onclick="triggerRestModal()"><i data-lucide="clock"></i> Rest Timer</button>
+                  <button class="btn btn-outline glass" onclick="skipSessionExercise()"><i data-lucide="skip-forward"></i> Skip</button>
+                  <button class="btn btn-primary" id="session-next-btn" onclick="nextSessionExercise()">Next Exercise <i data-lucide="arrow-right"></i></button>
+                  <button class="btn btn-success hidden" id="session-finish-btn" onclick="finishSessionWorkout()">Complete Workout <i data-lucide="check-circle"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rest Timer Modal -->
+            <div id="rest-timer-modal" class="modal-overlay hidden">
+              <div class="modal-card glass text-center">
+                <h2>Rest Period</h2>
+                <p>Grab a sip of water and let your heart rate settle.</p>
+                <div class="rest-timer-digits font-header" id="rest-timer-val">90</div>
+                <div class="rest-timer-actions mt-4">
+                  <button class="btn btn-outline glass" onclick="adjustRestTimer(-15)">-15s</button>
+                  <button class="btn btn-outline glass" onclick="adjustRestTimer(15)">+15s</button>
+                  <button class="btn btn-primary" onclick="closeRestModal()">Skip Rest</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VIEW: Nutrition -->
+          <div id="view-nutrition" class="app-view">
+            <!-- AI Meal Scanner Panel -->
+            <div class="panel-card glass hover-glow mb-6 w-full">
+              <div class="panel-header border-bottom">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="camera" class="secondary"></i>
+                  <h3>AI Meal Scanner</h3>
+                </div>
+                <span class="badge primary">Beta Scanner</span>
+              </div>
+              <div class="panel-body text-center p-6">
+                <p class="small-label">Upload food photos. FitGenie will analyze calorie densities and estimate ingredients macros dynamically.</p>
+                
+                <div class="meal-scanner-uploader mt-4" onclick="document.getElementById('meal-scanner-file').click()">
+                  <i data-lucide="image" class="social-logo" style="width: 2.5rem; height: 2.5rem; color: var(--secondary);"></i>
+                  <h4 class="mt-2 font-semibold">Tap to select or drop a meal photo</h4>
+                  <span class="small-label">Simulating Vision Analysis</span>
+                </div>
+                <input type="file" id="meal-scanner-file" class="hidden" accept="image/*" onchange="simulateMealScan(event)">
+
+                <div id="meal-scanner-results" class="hidden mt-4 p-4 glass text-left" style="background-color: rgba(var(--primary-rgb), 0.05); border: 1.5px dashed var(--primary);">
+                  <!-- Populated via JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Macros Summary Bar -->
+            <div class="nutrition-summary-bar glass hover-glow">
+              <div class="macro-capsule">
+                <span class="macro-title">Calories</span>
+                <span class="macro-val font-header" id="nut-cal-text">0 / 2400 kcal</span>
+                <div class="macro-slider-bar"><div class="macro-slider-fill bg-accent" id="nut-cal-fill" style="width: 0%;"></div></div>
+              </div>
+              <div class="macro-capsule">
+                <span class="macro-title">Proteins</span>
+                <span class="macro-val font-header" id="nut-prot-text">0 / 150g</span>
+                <div class="macro-slider-bar"><div class="macro-slider-fill bg-primary" id="nut-prot-fill" style="width: 0%;"></div></div>
+              </div>
+              <div class="macro-capsule">
+                <span class="macro-title">Carbohydrates</span>
+                <span class="macro-val font-header" id="nut-carb-text">0 / 220g</span>
+                <div class="macro-slider-bar"><div class="macro-slider-fill bg-secondary" id="nut-carb-fill" style="width: 0%;"></div></div>
+              </div>
+              <div class="macro-capsule">
+                <span class="macro-title">Fats</span>
+                <span class="macro-val font-header" id="nut-fat-text">0 / 75g</span>
+                <div class="macro-slider-bar"><div class="macro-slider-fill" id="nut-fat-fill" style="width: 0%; background: #FACC15;"></div></div>
+              </div>
+            </div>
+
+            <!-- Meal Plan Cards Grid -->
+            <div class="meals-layout-grid mt-6" id="nutrition-meals-grid">
+              <!-- Loaded dynamically via Javascript -->
+            </div>
+          </div>
+
+          <!-- VIEW: Grocery List -->
+          <div id="view-grocery" class="app-view">
+            <!-- AI Grocery Budget Optimizer Slider -->
+            <div class="panel-card glass hover-glow mb-6 w-full">
+              <div class="panel-header border-bottom">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="wallet" class="primary"></i>
+                  <h3>AI Grocery Optimizer</h3>
+                </div>
+                <span class="badge accent">Budget Optimization</span>
+              </div>
+              <div class="panel-body p-4">
+                <label class="field-section-label">Select Weekly Budget Limit</label>
+                <div class="custom-range-slider">
+                  <input type="range" id="grocery-budget-slider" min="40" max="200" value="120" step="10" oninput="updateGroceryBudgetLimit(this.value)">
+                  <span class="range-bubble" id="bubble-grocery-budget">$120 Limit</span>
+                </div>
+                <p class="small-label mt-3" id="grocery-budget-hint">Grocery compilation optimized for protein-dense items within budget constraints.</p>
+              </div>
+            </div>
+
+            <div class="grocery-container-box glass hover-glow">
+              <div class="grocery-header-bar">
+                <h3>Ingredients Checklist</h3>
+                <div class="grocery-add-form">
+                  <div class="input-floating-group no-label-height" style="margin: 0; flex-grow: 1;">
+                    <input type="text" id="grocery-new-item" placeholder="Add custom item (e.g. Protein Bars)">
+                  </div>
+                  <button class="btn btn-primary btn-sm" onclick="addCustomGroceryItem()"><i data-lucide="plus"></i> Add</button>
+                </div>
+              </div>
+              <div class="grocery-content-sections" id="grocery-sections-box">
+                <!-- Grouped groceries generated dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- VIEW: Wearables Hub -->
+          <div id="view-wearables" class="app-view">
+            <!-- Grid list of brands connection structures -->
+            <div class="wearables-brands-grid">
+              <!-- Apple Watch -->
+              <div class="wearables-brand-card glass hover-glow" id="wear-card-Apple">
+                <div class="brand-top-row">
+                  <i data-lucide="watch" class="secondary"></i>
+                  <h4>Apple Watch</h4>
+                </div>
+                <span class="badge text-secondary status-label" id="wear-status-Apple">Disconnected</span>
+                <button class="btn btn-outline btn-sm w-full mt-4" onclick="toggleWearableConnection('Apple')">Connect Device</button>
+              </div>
+              <!-- Garmin -->
+              <div class="wearables-brand-card glass hover-glow" id="wear-card-Garmin">
+                <div class="brand-top-row">
+                  <i data-lucide="watch" class="primary"></i>
+                  <h4>Garmin Connect</h4>
+                </div>
+                <span class="badge text-secondary status-label" id="wear-status-Garmin">Disconnected</span>
+                <button class="btn btn-outline btn-sm w-full mt-4" onclick="toggleWearableConnection('Garmin')">Connect Device</button>
+              </div>
+              <!-- Fitbit -->
+              <div class="wearables-brand-card glass hover-glow" id="wear-card-Fitbit">
+                <div class="brand-top-row">
+                  <i data-lucide="watch" class="accent"></i>
+                  <h4>Fitbit</h4>
+                </div>
+                <span class="badge text-secondary status-label" id="wear-status-Fitbit">Disconnected</span>
+                <button class="btn btn-outline btn-sm w-full mt-4" onclick="toggleWearableConnection('Fitbit')">Connect Device</button>
+              </div>
+              <!-- Samsung Galaxy Watch -->
+              <div class="wearables-brand-card glass hover-glow" id="wear-card-Samsung">
+                <div class="brand-top-row">
+                  <i data-lucide="watch" class="success"></i>
+                  <h4>Galaxy Watch</h4>
+                </div>
+                <span class="badge text-secondary status-label" id="wear-status-Samsung">Disconnected</span>
+                <button class="btn btn-outline btn-sm w-full mt-4" onclick="toggleWearableConnection('Samsung')">Connect Device</button>
+              </div>
+              <!-- Google Pixel Watch -->
+              <div class="wearables-brand-card glass hover-glow" id="wear-card-GooglePixel">
+                <div class="brand-top-row">
+                  <i data-lucide="watch" style="color: #4285F4;"></i>
+                  <h4>Pixel Watch</h4>
+                </div>
+                <span class="badge text-secondary status-label" id="wear-status-GooglePixel">Disconnected</span>
+                <button class="btn btn-outline btn-sm w-full mt-4" onclick="toggleWearableConnection('GooglePixel')">Connect Device</button>
+              </div>
+              <!-- Amazfit -->
+              <div class="wearables-brand-card glass hover-glow" id="wear-card-Amazfit">
+                <div class="brand-top-row">
+                  <i data-lucide="watch" style="color: #E21B2C;"></i>
+                  <h4>Amazfit</h4>
+                </div>
+                <span class="badge text-secondary status-label" id="wear-status-Amazfit">Disconnected</span>
+                <button class="btn btn-outline btn-sm w-full mt-4" onclick="toggleWearableConnection('Amazfit')">Connect Device</button>
+              </div>
+            </div>
+
+            <!-- Wearables Dashboard Telemetry -->
+            <div class="panel-card glass hover-glow mt-6 w-full hidden" id="wearables-telemetry-panel">
+              <div class="panel-header border-bottom">
+                <h3>Live Wearable Analytics</h3>
+                <button class="btn btn-accent btn-sm" id="btn-sync-telemetry" onclick="syncWearablesTelemetry()"><i data-lucide="refresh-cw"></i> Sync Now</button>
+              </div>
+              <div class="panel-body mt-4">
+                <div class="telemetry-grid">
+                  <div class="telemetry-box glass text-center">
+                    <span class="small-label">Heart Rate</span>
+                    <h3 id="tele-heart">72 <span class="calc-unit">bpm</span></h3>
+                  </div>
+                  <div class="telemetry-box glass text-center">
+                    <span class="small-label">HRV</span>
+                    <h3 id="tele-hrv">58 <span class="calc-unit">ms</span></h3>
+                  </div>
+                  <div class="telemetry-box glass text-center">
+                    <span class="small-label">SpO2</span>
+                    <h3 id="tele-spo2">98%</h3>
+                  </div>
+                  <div class="telemetry-box glass text-center">
+                    <span class="small-label">Active Burn</span>
+                    <h3 id="tele-calories">420 <span class="calc-unit">kcal</span></h3>
+                  </div>
+                  <div class="telemetry-box glass text-center">
+                    <span class="small-label">Resting HR</span>
+                    <h3 id="tele-resting">60 <span class="calc-unit">bpm</span></h3>
+                  </div>
+                  <div class="telemetry-box glass text-center">
+                    <span class="small-label">Sleep Hours</span>
+                    <h3 id="tele-sleep">7.8 <span class="calc-unit">hrs</span></h3>
+                  </div>
+                  <div class="telemetry-box glass text-center">
+                    <span class="small-label">Battery Level</span>
+                    <h3 id="tele-battery">84%</h3>
+                  </div>
+                  <div class="telemetry-box glass text-center">
+                    <span class="small-label">Workout Duration</span>
+                    <h3 id="tele-duration">45 <span class="calc-unit">min</span></h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VIEW: AI Coach Chat -->
+          <div id="view-chat" class="app-view">
+            <!-- AI Voice Coach Controls Overlay -->
+            <div class="panel-card glass hover-glow mb-4 w-full">
+              <div class="panel-body flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="mini-coach-avatar"><i data-lucide="mic"></i></div>
+                  <div>
+                    <h4>AI Voice Coach Conversations</h4>
+                    <p class="small-label">Enable real-time speech responses from your coach</p>
+                  </div>
+                </div>
+                <button class="btn btn-outline btn-sm glass" id="btn-voice-coach-toggle" onclick="toggleVoiceOutput()"><i data-lucide="volume-2"></i> Voice Off</button>
+              </div>
+            </div>
+
+            <div class="chat-wrapper-box glass hover-glow">
+              <!-- Chat History Pane -->
+              <div class="chat-messages-pane" id="chat-messages-container">
+                <!-- Loaded via JS -->
+              </div>
+
+              <!-- Suggested Questions Pills -->
+              <div class="chat-suggestions-row" id="chat-suggestions-box">
+                <!-- Loaded via JS -->
+              </div>
+
+              <!-- Bottom Input Panel -->
+              <div class="chat-input-bar">
+                <button class="btn-icon glass" id="btn-voice-input" onclick="toggleVoiceInput()" title="Voice Input">
+                  <div class="pulse-wave wave-1"></div>
+                  <div class="pulse-wave wave-2"></div>
+                  <i data-lucide="mic"></i>
+                </button>
+                <div class="chat-input-wrapper-premium flex w-full gap-2">
+                  <input type="text" id="chat-user-input" placeholder="Ask anything: 'Swap my workout because of knee soreness'..." onkeydown="handleChatKeyDown(event)">
+                </div>
+                <button class="btn btn-primary" onclick="sendChatMessage()">Send <i data-lucide="send"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- VIEW: Daily Check-In -->
+          <div id="view-checkin" class="app-view">
+            <div class="checkin-container glass hover-glow">
+              <h2>Daily Biometric Check-In</h2>
+              <p class="step-desc">Log your state today. We will calibrate your target exercises and calorie goals dynamically.</p>
+              
+              <form id="form-checkin" onsubmit="handleCheckinSubmit(event)">
+                <div class="inputs-grid mt-4">
+                  <!-- Mood -->
+                  <div class="input-group">
+                    <label class="field-section-label">How is your Mood today?</label>
+                    <div class="choice-cards-grid" data-input-id="check-mood">
+                      <div class="choice-card clickable-card" data-value="Excellent">
+                        <span>😃 Excellent</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Good">
+                        <span>🙂 Good</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Tired">
+                        <span>🥱 Tired</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Stressed">
+                        <span>😰 Stressed</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="check-mood" required>
+                  </div>
+                  <!-- Energy -->
+                  <div class="input-group">
+                    <label class="field-section-label">Current Energy Levels (1-10)</label>
+                    <input type="range" id="check-energy" min="1" max="10" value="7" oninput="document.getElementById('energy-val-ind').innerText = this.value">
+                    <span class="range-indicator">Score: <strong id="energy-val-ind">7</strong>/10</span>
+                  </div>
+                  <!-- Sleep -->
+                  <div class="input-floating-group icon-left mt-3">
+                    <i data-lucide="clock" class="input-icon"></i>
+                    <input type="number" id="check-sleep" min="3" max="14" step="0.5" value="7.5" required placeholder=" ">
+                    <label for="check-sleep">Sleep Hours Last Night</label>
+                    <span class="floating-focus-line"></span>
+                  </div>
+                  <!-- Weight -->
+                  <div class="input-floating-group icon-left mt-3">
+                    <i data-lucide="scale" class="input-icon"></i>
+                    <input type="number" id="check-weight" min="30" max="250" step="0.1" placeholder=" " required>
+                    <label for="check-weight">Today's Weight (kg)</label>
+                    <span class="floating-focus-line"></span>
+                  </div>
+                  <!-- Difficulty -->
+                  <div class="input-group mt-3">
+                    <label class="field-section-label">Recent Workout Difficulty</label>
+                    <div class="choice-cards-grid" data-input-id="check-difficulty">
+                      <div class="choice-card clickable-card" data-value="Too Easy">
+                        <span>Too Easy</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Just Right">
+                        <span>Just Right</span>
+                      </div>
+                      <div class="choice-card clickable-card" data-value="Exhausting">
+                        <span>Exhausting</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="check-difficulty" required>
+                  </div>
+                  <!-- Meals Done -->
+                  <div class="input-group mt-3">
+                    <label class="field-section-label">Meals Completed Today</label>
+                    <div class="checkbox-row mt-2">
+                      <label class="custom-checkbox-wrapper">
+                        <input type="checkbox" id="check-meal-b">
+                        <span class="custom-checkbox-box"><i data-lucide="check"></i></span>
+                        <span class="custom-checkbox-label">Breakfast</span>
+                      </label>
+                      <label class="custom-checkbox-wrapper">
+                        <input type="checkbox" id="check-meal-l">
+                        <span class="custom-checkbox-box"><i data-lucide="check"></i></span>
+                        <span class="custom-checkbox-label">Lunch</span>
+                      </label>
+                      <label class="custom-checkbox-wrapper">
+                        <input type="checkbox" id="check-meal-d">
+                        <span class="custom-checkbox-box"><i data-lucide="check"></i></span>
+                        <span class="custom-checkbox-label">Dinner</span>
+                      </label>
+                      <label class="custom-checkbox-wrapper">
+                        <input type="checkbox" id="check-meal-s">
+                        <span class="custom-checkbox-box"><i data-lucide="check"></i></span>
+                        <span class="custom-checkbox-label">Snack</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                  <button type="submit" class="btn btn-primary btn-lg">Submit Daily Check-In <i data-lucide="check-circle"></i></button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- VIEW: Injury Management -->
+          <div id="view-injury" class="app-view">
+            <div class="injury-layout-double glass hover-glow">
+              <!-- Left: Clickable interactive body -->
+              <div class="injury-body-selector text-center">
+                <h3>Select Sore/Pain Areas</h3>
+                <p class="small-label">Tap muscles on the diagram to toggle rehab modifiers.</p>
+                
+                <div class="body-diagram-svg-container">
+                  <svg width="220" height="380" viewBox="0 0 100 160" class="human-body-svg">
+                    <!-- Head -->
+                    <circle cx="50" cy="15" r="7" class="body-part" id="part-head" onclick="togglePainArea('Head')" />
+                    <!-- Neck -->
+                    <rect x="48" y="22" width="4" height="4" class="body-part" id="part-neck" onclick="togglePainArea('Neck')" />
+                    <!-- Chest -->
+                    <path d="M 38 27 L 62 27 L 60 48 L 40 48 Z" class="body-part" id="part-chest" onclick="togglePainArea('Chest')" />
+                    <!-- Shoulders -->
+                    <circle cx="34" cy="30" r="5" class="body-part" id="part-shoulder-l" onclick="togglePainArea('Shoulders')" />
+                    <circle cx="66" cy="30" r="5" class="body-part" id="part-shoulder-r" onclick="togglePainArea('Shoulders')" />
+                    <!-- Back (Upper/Lower) -->
+                    <rect x="42" y="50" width="16" height="22" class="body-part" id="part-back" onclick="togglePainArea('Back')" />
+                    <!-- Elbows -->
+                    <circle cx="24" cy="52" r="4.5" class="body-part" id="part-elbow-l" onclick="togglePainArea('Elbows')" />
+                    <circle cx="76" cy="52" r="4.5" class="body-part" id="part-elbow-r" onclick="togglePainArea('Elbows')" />
+                    <!-- Knees -->
+                    <circle cx="38" cy="115" r="5" class="body-part" id="part-knee-l" onclick="togglePainArea('Knees')" />
+                    <circle cx="62" cy="115" r="5" class="body-part" id="part-knee-r" onclick="togglePainArea('Knees')" />
+                    <!-- Ankles -->
+                    <circle cx="38" cy="148" r="4" class="body-part" id="part-ankle-l" onclick="togglePainArea('Ankles')" />
+                    <circle cx="62" cy="148" r="4" class="body-part" id="part-ankle-r" onclick="togglePainArea('Ankles')" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Right: Active Sore Details and Recovery Guides -->
+              <div class="injury-status-panel">
+                <h3>FitGenie Injury Status</h3>
+                <p class="small-label">Below are your selected pain regions and rehab movements.</p>
+                
+                <div class="active-pains-list mt-4" id="injury-active-list">
+                  <!-- Generated via JS -->
+                </div>
+
+                <div class="rehab-exercises-box mt-6" id="injury-rehab-box">
+                  <!-- Generated via JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VIEW: Progress Analytics -->
+          <div id="view-progress" class="app-view">
+            <!-- AI Health Simulator Tool -->
+            <div class="panel-card glass hover-glow mb-6 w-full">
+              <div class="panel-header border-bottom">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="rocket" class="accent"></i>
+                  <h3>AI Future Simulator</h3>
+                </div>
+                <span class="badge primary">Calculations Matrix</span>
+              </div>
+              <div class="panel-body p-4">
+                <p class="small-label">Predict physical parameter changes based on current caloric values.</p>
+                
+                <div class="days-tab-nav mt-3" id="simulator-day-tabs">
+                  <button class="day-tab active" onclick="switchSimulatorProjections(30, this)">30 Days</button>
+                  <button class="day-tab" onclick="switchSimulatorProjections(60, this)">60 Days</button>
+                  <button class="day-tab" onclick="switchSimulatorProjections(90, this)">90 Days</button>
+                </div>
+
+                <div class="projections-split-grid mt-4">
+                  <div class="telemetry-box glass text-center">
+                    <span class="small-label">Target Weight</span>
+                    <h3 id="sim-weight">70.2 <span class="calc-unit">kg</span></h3>
+                  </div>
+                  <div class="telemetry-box glass text-center">
+                    <span class="small-label">Target Fat Loss</span>
+                    <h3 id="sim-fat">-1.8 <span class="calc-unit">kg</span></h3>
+                  </div>
+                  <div class="telemetry-box glass text-center">
+                    <span class="small-label">Est. Muscle Gain</span>
+                    <h3 id="sim-muscle">+0.4 <span class="calc-unit">kg</span></h3>
+                  </div>
+                  <div class="telemetry-box glass text-center">
+                    <span class="small-label">Target BMI</span>
+                    <h3 id="sim-bmi">22.8</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Health Risk Warnings -->
+            <div class="panel-card glass hover-glow mb-6 w-full" style="border-left: 5px solid var(--danger);">
+              <div class="panel-header">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="shield-alert" class="danger-text"></i>
+                  <h3>AI Health Risk Analyzer</h3>
+                </div>
+                <span class="badge accent">Risk Index: Low</span>
+              </div>
+              <div class="panel-body">
+                <p class="small-label" id="risk-analyzer-msg">"Cardiorespiratory index and HRV ratios normal. Warning: Water logs show slight dehydration tendency on workout days. Rest intervals adapted."</p>
+              </div>
+            </div>
+
+            <!-- Summary Stats -->
+            <div class="progress-top-metrics">
+              <div class="panel-card glass hover-glow">
+                <span class="small-label">Predicted 12-Week Weight Projection</span>
+                <h2 class="mt-1 accent font-header" id="prog-projection-val">68.4 kg</h2>
+                <p class="small-label text-success" id="prog-projection-desc">Est. weight reduction based on deficit calculations</p>
+              </div>
+              <div class="panel-card glass hover-glow">
+                <span class="small-label">Workout Consistency</span>
+                <h2 class="mt-1 primary font-header" id="prog-consistency-val">100%</h2>
+                <p class="small-label text-secondary">Logged vs Planned Sessions</p>
+              </div>
+              <div class="panel-card glass hover-glow">
+                <span class="small-label">Current BMI Range</span>
+                <h2 class="mt-1 secondary font-header" id="prog-bmi-val">23.5</h2>
+                <p class="small-label text-secondary" id="prog-bmi-desc">Normal Healthy weight index</p>
+              </div>
+            </div>
+
+            <!-- Time Filters for Chart Metrics -->
+            <div class="chart-filter-row flex gap-2 justify-end mt-6 w-full">
+              <button class="btn btn-outline btn-sm glass chart-time-tab active" onclick="switchChartTimeline('week', this)">Week</button>
+              <button class="btn btn-outline btn-sm glass chart-time-tab" onclick="switchChartTimeline('month', this)">Month</button>
+              <button class="btn btn-outline btn-sm glass chart-time-tab" onclick="switchChartTimeline('year', this)">Year</button>
+            </div>
+
+            <!-- Charts Container Grid -->
+            <div class="charts-grid-container mt-3">
+              <div class="chart-card glass hover-glow">
+                <h4>AI Wellness Radar Chart</h4>
+                <div class="chart-canvas-wrapper">
+                  <canvas id="chart-wellness-radar"></canvas>
+                </div>
+              </div>
+              
+              <div class="chart-card glass hover-glow">
+                <h4>Weight & Body Fat Trends</h4>
+                <div class="chart-canvas-wrapper">
+                  <canvas id="chart-weight"></canvas>
+                </div>
+              </div>
+              
+              <div class="chart-card glass hover-glow">
+                <h4>Caloric Balance Logs</h4>
+                <div class="chart-canvas-wrapper">
+                  <canvas id="chart-calories"></canvas>
+                </div>
+              </div>
+
+              <div class="chart-card glass hover-glow">
+                <h4>Macronutrient Target Splits</h4>
+                <div class="chart-canvas-wrapper">
+                  <canvas id="chart-macros-split"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Health Activity Timeline Feed -->
+            <div class="panel-card glass hover-glow mt-6 w-full">
+              <div class="panel-header border-bottom">
+                <h3>AI Health Timeline</h3>
+              </div>
+              <div class="panel-body mt-4">
+                <div class="timeline-feed-box" id="timeline-feed-container">
+                  <!-- Generated via JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Weekly PDF Report Block -->
+            <div class="weekly-report-panel glass hover-glow mt-6">
+              <div class="report-content">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="file-text" class="primary"></i>
+                  <h3>Weekly AI Performance Report</h3>
+                </div>
+                <p>Generate a professional performance card detailing weight curves, exercise adherence, nutrition targets accuracy, and next-week recovery schedules.</p>
+              </div>
+              <button class="btn btn-primary" onclick="triggerWeeklyReportMock()">Generate Report <i data-lucide="download"></i></button>
+            </div>
+
+            <!-- Mock Weekly Report Modal -->
+            <div id="weekly-report-modal" class="modal-overlay hidden">
+              <div class="modal-card glass print-report-card">
+                <button class="auth-close-btn" onclick="closeWeeklyReportModal()"><i data-lucide="x"></i></button>
+                <div class="report-header border-bottom">
+                  <h2>FITGENIE PERFORMANCE ADVISOR</h2>
+                  <p>Client: <span id="rep-user-name">Alex Mercer</span> | Date: <span id="rep-date">July 7, 2026</span></p>
+                </div>
+                <div class="report-body mt-4">
+                  <div class="report-summary-stats">
+                    <div class="rep-stat-box">
+                      <h5>Streak Status</h5>
+                      <p id="rep-streak">3 Days</p>
+                    </div>
+                    <div class="rep-stat-box">
+                      <h5>Calorie Accuracy</h5>
+                      <p id="rep-accuracy">94.2%</p>
+                    </div>
+                    <div class="rep-stat-box">
+                      <h5>Active Strain Mode</h5>
+                      <p id="rep-strain">Normal / Injury Adaptive</p>
+                    </div>
+                  </div>
+                  
+                  <h4 class="mt-4">Advisor Assessment & Next Steps</h4>
+                  <p id="rep-advisor-content" class="advisor-narrative">
+                    "Excellent adherence this cycle. Your daily hydration metrics averaged 2.8L, showing a positive trend. Based on your current 12-week math projection, you are on track to achieve your goal. Weekly muscle fatigue registers normal. Ensure active rest on off days."
+                  </p>
+                </div>
+                <div class="report-footer border-top mt-6">
+                  <p>Computed by FitGenie AI System | Capstone Prototype Edition</p>
+                  <button class="btn btn-primary btn-sm mt-3" onclick="window.print()"><i data-lucide="printer"></i> Print / Save PDF</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VIEW: Achievements -->
+          <div id="view-achievements" class="app-view">
+            <div class="streak-banner-card glass hover-glow">
+              <div class="banner-content">
+                <i data-lucide="flame" class="streak-icon-large animate-bounce"></i>
+                <div>
+                  <h2 id="achieve-streak-title" class="font-header">3 Day Streak</h2>
+                  <p>Log your food, hydrate, and start workouts daily to build consistent milestones!</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Badges Gallery -->
+            <div class="badges-grid-container mt-6" id="badges-container">
+              <!-- Loaded dynamically via JS -->
+            </div>
+          </div>
+
+          <!-- VIEW: User Profile & Settings -->
+          <div id="view-profile" class="app-view">
+            <div class="profile-layout-grid">
+              <!-- Left card: Bio -->
+              <div class="panel-card glass hover-glow">
+                <div class="panel-header border-bottom">
+                  <h3>Edit Profile Details</h3>
+                </div>
+                <div class="panel-body">
+                  
+                  <!-- Profile Avatar Section -->
+                  <div class="flex items-center gap-4 mb-6">
+                    <div class="user-avatar" id="profile-avatar-large" style="width: 5rem; height: 5rem; font-size: 1.85rem;">AM</div>
+                    <div>
+                      <button class="btn btn-outline btn-sm glass" onclick="document.getElementById('avatar-upload-file').click()"><i data-lucide="upload"></i> Upload Photo</button>
+                      <input type="file" id="avatar-upload-file" class="hidden" accept="image/*" onchange="handleAvatarUpload(event)">
+                      <p class="small-label mt-1">PNG, JPG (Max 2MB)</p>
+                    </div>
+                  </div>
+
+                  <form id="form-profile-edit" onsubmit="handleProfileEdit(event)">
+                    <div class="inputs-grid">
+                      <!-- Name Floating Input -->
+                      <div class="input-floating-group icon-left mt-2">
+                        <i data-lucide="user" class="input-icon"></i>
+                        <input type="text" id="prof-name" required placeholder=" ">
+                        <label for="prof-name">Name</label>
+                        <span class="floating-focus-line"></span>
+                      </div>
+
+                      <!-- Age Floating Input -->
+                      <div class="input-floating-group icon-left mt-4">
+                        <i data-lucide="calendar" class="input-icon"></i>
+                        <input type="number" id="prof-age" min="12" max="100" required placeholder=" ">
+                        <label for="prof-age">Age</label>
+                        <span class="floating-focus-line"></span>
+                      </div>
+
+                      <!-- Height Floating Input -->
+                      <div class="input-floating-group icon-left mt-4">
+                        <i data-lucide="ruler" class="input-icon"></i>
+                        <input type="number" id="prof-height" min="100" max="250" required placeholder=" ">
+                        <label for="prof-height">Height (cm)</label>
+                        <span class="floating-focus-line"></span>
+                      </div>
+
+                      <!-- Weight Floating Input -->
+                      <div class="input-floating-group icon-left mt-4">
+                        <i data-lucide="scale" class="input-icon"></i>
+                        <input type="number" id="prof-weight" min="30" max="250" step="0.1" required placeholder=" ">
+                        <label for="prof-weight">Weight (kg)</label>
+                        <span class="floating-focus-line"></span>
+                      </div>
+                      
+                      <!-- Custom Searchable Goal Selector Dropdown -->
+                      <div class="input-group mt-4">
+                        <label class="field-section-label">Primary Goal</label>
+                        <div class="custom-select-wrapper" id="select-prof-goal" data-value="Build Muscle">
+                          <div class="custom-select-trigger" onclick="toggleCustomSelect('select-prof-goal', event)">
+                            <span class="selected-text">Build Muscle & Strength</span>
+                            <i data-lucide="chevron-down"></i>
+                          </div>
+                          <div class="custom-select-options hidden" onclick="event.stopPropagation()">
+                            <div class="select-search-box">
+                              <i data-lucide="search"></i>
+                              <input type="text" placeholder="Search goals..." oninput="filterCustomSelect('select-prof-goal', this.value)">
+                            </div>
+                            <div class="options-list">
+                              <div class="select-option selected" data-value="Build Muscle" onclick="selectCustomOption('select-prof-goal', 'Build Muscle', 'Build Muscle & Strength')">Build Muscle & Strength</div>
+                              <div class="select-option" data-value="Lose Weight" onclick="selectCustomOption('select-prof-goal', 'Lose Weight', 'Lose Weight & Fat')">Lose Weight & Fat</div>
+                              <div class="select-option" data-value="Maintain" onclick="selectCustomOption('select-prof-goal', 'Maintain', 'Maintain Fitness & Tone')">Maintain Fitness & Tone</div>
+                              <div class="select-option" data-value="Athletic Performance" onclick="selectCustomOption('select-prof-goal', 'Athletic Performance', 'Athletic Performance')">Athletic Performance</div>
+                            </div>
+                          </div>
+                        </div>
+                        <input type="hidden" id="prof-goal" value="Build Muscle" required>
+                      </div>
+                      
+                      <!-- Custom Searchable Diet Selector Dropdown -->
+                      <div class="input-group mt-4">
+                        <label class="field-section-label">Diet Preference</label>
+                        <div class="custom-select-wrapper" id="select-prof-diet" data-value="Standard/Balanced">
+                          <div class="custom-select-trigger" onclick="toggleCustomSelect('select-prof-diet', event)">
+                            <span class="selected-text">Standard / Balanced</span>
+                            <i data-lucide="chevron-down"></i>
+                          </div>
+                          <div class="custom-select-options hidden" onclick="event.stopPropagation()">
+                            <div class="select-search-box">
+                              <i data-lucide="search"></i>
+                              <input type="text" placeholder="Search diets..." oninput="filterCustomSelect('select-prof-diet', this.value)">
+                            </div>
+                            <div class="options-list">
+                              <div class="select-option selected" data-value="Standard/Balanced" onclick="selectCustomOption('select-prof-diet', 'Standard/Balanced', 'Standard / Balanced')">Standard / Balanced</div>
+                              <div class="select-option" data-value="High Protein" onclick="selectCustomOption('select-prof-diet', 'High Protein', 'High Protein')">High Protein</div>
+                              <div class="select-option" data-value="Keto/Low Carb" onclick="selectCustomOption('select-prof-diet', 'Keto/Low Carb', 'Keto / Low Carb')">Keto / Low Carb</div>
+                              <div class="select-option" data-value="Vegetarian" onclick="selectCustomOption('select-prof-diet', 'Vegetarian', 'Vegetarian')">Vegetarian</div>
+                              <div class="select-option" data-value="Vegan" onclick="selectCustomOption('select-prof-diet', 'Vegan', 'Vegan')">Vegan</div>
+                              <div class="select-option" data-value="Mediterranean" onclick="selectCustomOption('select-prof-diet', 'Mediterranean', 'Mediterranean')">Mediterranean</div>
+                            </div>
+                          </div>
+                        </div>
+                        <input type="hidden" id="prof-diet" value="Standard/Balanced" required>
+                      </div>
+                    </div>
+                    
+                    <div class="flex gap-3 mt-6">
+                      <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+                      <button type="button" class="btn btn-outline glass btn-lg" onclick="cancelProfileChanges()">Cancel</button>
+                      <button type="button" class="btn btn-outline glass btn-lg" onclick="exportProfileData()"><i data-lucide="download"></i> Export JSON</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <!-- Right card: System Preferences -->
+              <div class="panel-card glass hover-glow">
+                <div class="panel-header border-bottom">
+                  <h3>App Settings</h3>
+                </div>
+                <div class="panel-body flex flex-column gap-4">
+                  <div class="settings-toggle-row">
+                    <div>
+                      <h4>Dark Mode</h4>
+                      <p class="small-label">Switch layout stylesheet to dark accenting</p>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox" id="settings-dark-mode-chk" onchange="toggleTheme()">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+
+                  <div class="settings-toggle-row">
+                    <div>
+                      <h4>Metric Units (kg, cm, L)</h4>
+                      <p class="small-label">Use metric calculations instead of imperial systems</p>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox" checked disabled>
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+
+                  <div class="settings-toggle-row border-top pt-4">
+                    <div>
+                      <h4 class="danger-text">Clear Sandbox Database</h4>
+                      <p class="small-label">Warning: This deletes all logged logs, onboarding data, active profiles, and resets streak logs.</p>
+                    </div>
+                    <button class="btn btn-danger btn-sm" onclick="clearSystemData()">Delete Data</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+    </div>
+
+    <!-- Floating AI Quick Assistant Modal Popup -->
+    <div id="quick-coach-modal" class="quick-coach-modal glass hidden" onclick="event.stopPropagation()">
+      <div class="quick-coach-header">
+        <div class="flex items-center gap-2">
+          <div class="mini-coach-avatar"><i data-lucide="wand-2"></i></div>
+          <h4>Quick Genie Assistant</h4>
+        </div>
+        <button class="btn-text btn-sm" onclick="toggleQuickCoachModal()"><i data-lucide="x"></i></button>
+      </div>
+      <div class="quick-coach-body" id="quick-coach-chat-history">
+        <div class="chat-bubble bot"><p>Hi! Ask a quick question about macros, rest swaps, or weight forecasts.</p></div>
+      </div>
+      <div class="quick-coach-footer">
+        <input type="text" id="quick-coach-input" placeholder="Type query here..." onkeydown="handleQuickCoachKeyDown(event)">
+        <button class="btn btn-primary btn-sm" onclick="sendQuickCoachMessage()"><i data-lucide="send"></i></button>
+      </div>
+    </div>
+
+    <!-- AI Coach Floating Toggle (Active only on app screens) -->
+    <div id="ai-coach-bubble" class="ai-coach-bubble hidden" onclick="toggleQuickCoachModal(event)">
+      <i data-lucide="wand-2"></i>
+      <span class="bubble-ping"></span>
+    </div>
+
+    <!-- Global Command Palette Modal -->
+    <div id="command-palette-modal" class="modal-overlay hidden" onclick="closeCommandPalette(event)">
+      <div class="command-palette-card glass" onclick="event.stopPropagation()">
+        <div class="command-search-header">
+          <i data-lucide="search"></i>
+          <input type="text" id="command-palette-input" placeholder="Type a feature, goal, or command (e.g. 'Log Water', 'Go to Analytics')..." oninput="filterCommandPalette()">
+          <span class="esc-badge"><kbd>ESC</kbd></span>
+        </div>
+        <div class="command-list-container" id="command-palette-results">
+          <!-- Populated dynamically by app.js -->
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- App Core Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
